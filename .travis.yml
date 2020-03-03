@@ -1,0 +1,9 @@
+language: java
+os: windows
+jdk:
+  - openjdk11
+script:
+  - mvn clean install
+cache:
+  directories:
+    - $HOME/.m2
