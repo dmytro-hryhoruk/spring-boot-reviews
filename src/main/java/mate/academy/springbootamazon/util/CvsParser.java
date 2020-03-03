@@ -30,7 +30,11 @@ public class CvsParser {
             reviewEntity.setProductId(fields[1]);
             reviewEntity.setUserId(fields[2]);
             reviewEntity.setProfileName(fields[3]);
-            reviewEntity.setText(fields[9]);
+            StringBuilder text = new StringBuilder();
+            for (int j = 9; j < fields.length ; j++) {
+                text.append(fields[j]).append(",");
+            }
+            reviewEntity.setText(text.toString());
             reviewEntities.add(reviewEntity);
         }
         return reviewEntities;
