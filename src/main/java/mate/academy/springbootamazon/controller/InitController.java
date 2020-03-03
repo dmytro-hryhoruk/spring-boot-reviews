@@ -14,15 +14,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class InitController {
     private ReviewRepository reviewRepository;
+    private CvsParser cvsParser;
 
-    public InitController(ReviewRepository reviewRepository) {
+    public InitController(ReviewRepository reviewRepository, CvsParser cvsParser) {
         this.reviewRepository = reviewRepository;
+        this.cvsParser = cvsParser;
     }
 
     @PostConstruct
     public void init() throws IOException {
         File file = new ClassPathResource("Reviews.csv").getFile();
-        CvsParser cvsParser = new CvsParser();
         Long start = System.nanoTime();
         List<ReviewEntity> reviewEntities = cvsParser.parseCvsToReviews(file);
         reviewRepository.saveAll(reviewEntities);

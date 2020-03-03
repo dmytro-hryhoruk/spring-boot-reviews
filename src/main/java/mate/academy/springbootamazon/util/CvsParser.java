@@ -9,7 +9,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import mate.academy.springbootamazon.entity.ReviewEntity;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CvsParser {
 
     private List<String> convertFileIntoList(File file) {
@@ -31,7 +33,7 @@ public class CvsParser {
             reviewEntity.setUserId(fields[2]);
             reviewEntity.setProfileName(fields[3]);
             StringBuilder text = new StringBuilder();
-            for (int j = 9; j < fields.length ; j++) {
+            for (int j = 9; j < fields.length; j++) {
                 text.append(fields[j]).append(",");
             }
             reviewEntity.setText(text.toString());
