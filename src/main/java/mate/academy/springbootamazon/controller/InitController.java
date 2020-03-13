@@ -2,6 +2,8 @@ package mate.academy.springbootamazon.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import mate.academy.springbootamazon.entity.ReviewEntity;
@@ -25,8 +27,9 @@ public class InitController {
     public void init() throws IOException {
         File file = new ClassPathResource("Reviews.csv").getFile();
         Long start = System.nanoTime();
-        List<ReviewEntity> reviewEntities = cvsParser.parseCvsToReviews(file);
+        List<ReviewEntity> reviewEntities = cvsParser.parseCsvToReviews(file);
         reviewRepository.saveAll(reviewEntities);
+        System.out.println(reviewEntities.get(reviewEntities.size()-1).getId());
         System.out.println("=================================");
         System.out.println((System.nanoTime() - start) / 1000000000);
         System.out.println("=================================");
